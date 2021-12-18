@@ -30,6 +30,18 @@
 	<title>{title}</title>
 </svelte:head>
 
+<div class="todos">
+	<h1>{title}</h1>
+
+	<form action="/todos.json" method="post" class="new">
+		<input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
+	</form>
+
+	{#each todos as todo}
+		<TodoItem {todo} />
+	{/each}
+</div>
+
 <style>
 	.todos {
 		width: 100%;
@@ -57,15 +69,3 @@
 		outline: none;
 	}
 </style>
-
-<div class="todos">
-	<h1>{title}</h1>
-
-	<form action="/todos.json" method="post" class="new">
-		<input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo" />
-	</form>
-
-	{#each todos as todo}
-		<TodoItem {todo} />
-	{/each}
-</div>

@@ -2,6 +2,22 @@
 	export let todo: Todo;
 </script>
 
+<div class="todo">
+	<form action="" method="">
+		<input type="hidden" name="done" value="" />
+		<button aria-label="Mark done/not done" class="toggle" />
+	</form>
+
+	<form action="/todos/{todo.uid}.json?_method=patch" method="post" class="text">
+		<input type="text" name="text" value={todo.text} />
+		<button aria-label="Save todo" class="save" />
+	</form>
+
+	<form action="/todos/{todo.uid}.json?_method=delete" method="post">
+		<button aria-label="Delete todo" class="delete" />
+	</form>
+</div>
+
 <style>
 	.todo {
 		display: grid;
@@ -61,7 +77,7 @@
 		transition: opacity 0.2s;
 		opacity: 1;
 	}
-	
+
 	/* TODO: Uncomment when the API endpoints are available
   .done {
     transform: none;
@@ -73,19 +89,3 @@
     background-image: url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 } */
 </style>
-
-<div class="todo">
-	<form action="" method="">
-		<input type="hidden" name="done" value="" />
-		<button aria-label="Mark done/not done" class="toggle" />
-	</form>
-
-	<form action="" method="" class="text">
-		<input type="text" value={todo.text} />
-		<button aria-label="Save todo" class="save" />
-	</form>
-
-	<form action="/todos/{todo.uid}.json?_method=delete" method="post">
-		<button aria-label="Delete todo" class="delete" />
-	</form>
-</div>
