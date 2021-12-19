@@ -1,19 +1,42 @@
 <script lang="ts">
+	import { enhance } from '$lib/actions/form';
+
 	export let todo: Todo;
+	export let processDeletedTodoResult: (res: Response) => void;
+	export let processUpdatedTodoResult: (res: Response) => void;
 </script>
 
 <div class="todo" class:done={todo.done}>
-	<form action="/todos/{todo.uid}.json?_method=patch" method="post">
+	<form
+		action="/todos/{todo.uid}.json?_method=patch"
+		method="post"
+		use:enhance={{
+			result: processUpdatedTodoResult
+		}}
+	>
 		<input type="hidden" name="done" value={todo.done ? '' : 'true'} />
 		<button aria-label="Mark todo as {todo.done ? 'not done' : 'done'}" class="toggle" />
 	</form>
 
-	<form action="/todos/{todo.uid}.json?_method=patch" method="post" class="text">
+	<form
+		action="/todos/{todo.uid}.json?_method=patch"
+		method="post"
+		class="text"
+		use:enhance={{
+			result: processUpdatedTodoResult
+		}}
+	>
 		<input type="text" name="text" value={todo.text} />
 		<button aria-label="Save todo" class="save" />
 	</form>
 
-	<form action="/todos/{todo.uid}.json?_method=delete" method="post">
+	<form
+		action="/todos/{todo.uid}.json?_method=delete"
+		method="post"
+		use:enhance={{
+			result: processDeletedTodoResult
+		}}
+	>
 		<button aria-label="Delete todo" class="delete" />
 	</form>
 </div>
@@ -78,13 +101,13 @@
 		opacity: 1;
 	}
 
-  .done {
-    transform: none;
-    opacity: 0.4;
-    filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1));
-  }
-  
-  .done .toggle {
-    background-image: url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
+	.done {
+		transform: none;
+		opacity: 0.4;
+		filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1));
+	}
+
+	.done .toggle {
+		background-image: url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	}
 </style>
