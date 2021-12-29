@@ -1,7 +1,7 @@
 import type { Request } from '@sveltejs/kit';
 import PrsimaClient from '$lib/prisma';
 
-const prisma = new PrsimaClient()
+const prisma = new PrsimaClient();
 
 export const api = async (request: Request, data?: Record<string, unknown>) => {
 	let body = {};
@@ -19,7 +19,7 @@ export const api = async (request: Request, data?: Record<string, unknown>) => {
 					text: data.text as string,
 					done: data.done as boolean
 				}
-			})
+			});
 			status = 201;
 			break;
 		case 'DELETE':
@@ -27,7 +27,7 @@ export const api = async (request: Request, data?: Record<string, unknown>) => {
 				where: {
 					uid: request.params.uid
 				}
-			})
+			});
 			status = 200;
 			break;
 		case 'PATCH':
@@ -39,7 +39,7 @@ export const api = async (request: Request, data?: Record<string, unknown>) => {
 					text: data.text,
 					done: data.done
 				}
-			})
+			});
 			status = 200;
 			break;
 

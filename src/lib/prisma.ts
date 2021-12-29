@@ -1,5 +1,5 @@
-import Prisma, * as PrsimaAll from "@prisma/client";
+import Prisma, * as PrsimaAll from '@prisma/client';
 
-const PrsimaClient = Prisma?.PrismaClient || PrsimaAll?.PrismaClient
+const PrsimaClient = Prisma?.PrismaClient || PrsimaAll?.PrismaClient;
 
-export default PrsimaClient
+export default PrsimaClient;
